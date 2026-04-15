@@ -2,10 +2,6 @@
 
 **The missing playbook for debugging real systems under pressure.**
 
-<p align="center">
-	<img src="assets/logo-placeholder.png" alt="AI-Powered Debugging Handbook" width="180" />
-</p>
-
 [![OpenAI](https://img.shields.io/badge/OpenAI-AI%20Debugging-412991?logo=openai&logoColor=white)](prompts/README.md)
 [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-In%20Editor%20Debugging-181717?logo=github&logoColor=white)](prompts/README.md)
 [![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white)](tools/README.md)
