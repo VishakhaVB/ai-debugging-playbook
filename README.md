@@ -1,15 +1,51 @@
 # 🚀 AI-Powered Debugging Handbook
 
-⚠️ Most developers don’t struggle to code.  
-They struggle to debug under pressure.
+**The missing playbook for debugging real systems under pressure.**
 
-This handbook shows you how to fix real production issues fast — using structured debugging + AI tools.
+<p align="center">
+	<img src="assets/logo-placeholder.png" alt="AI-Powered Debugging Handbook" width="180" />
+</p>
+
+[![OpenAI](https://img.shields.io/badge/OpenAI-AI%20Debugging-412991?logo=openai&logoColor=white)](prompts/README.md)
+[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-In%20Editor%20Debugging-181717?logo=github&logoColor=white)](prompts/README.md)
+[![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white)](tools/README.md)
+[![Prometheus](https://img.shields.io/badge/Prometheus-Metrics-E6522C?logo=prometheus&logoColor=white)](tools/README.md)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database%20Debugging-4169E1?logo=postgresql&logoColor=white)](case-studies/database-pool-exhaustion.md)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Deployment%20Debugging-326CE5?logo=kubernetes&logoColor=white)](case-studies/deployment-crashloop-env-drift.md)
+
+⚠️ Production incident at 2:13 AM. Alerts flooding. Logs noisy. Root cause unclear.
+
+Most developers do not fail at coding.  
+They fail at debugging under pressure.
+
+This handbook gives you a **repeatable system** to fix real production issues fast with structured debugging and AI support.
 
 > A practical debugging guide for frontend bugs, backend issues, database failures, and deployment incidents. Built to help you fix errors fast when the logs are noisy, the symptoms are misleading, and time is limited.
 
-If the system only works when the bug is obvious, it is not production-ready.
+If your system only works when the bug is obvious, it is not production-ready.
 
-This handbook is for real debugging under pressure: vague stack traces, partial outages, intermittent failures, performance regressions, and incidents that only reproduce on one machine, one browser, or one environment.
+This handbook is built for real debugging pressure: vague stack traces, partial outages, intermittent failures, performance regressions, and incidents that only reproduce in one environment.
+
+## ❗ Why This Exists
+
+Most debugging guides are written for clean demos, not messy production incidents.
+
+In real systems, you get:
+
+- vague errors that hide the real root cause
+- incomplete logs and conflicting symptoms
+- pressure to ship a fix before users feel the impact
+- incidents that only break in one environment
+
+This handbook exists to turn those moments into a **clear workflow** you can execute.
+
+## 👥 Who This Is For
+
+- Engineers handling real production debugging, not toy examples
+- Backend developers dealing with latency, retries, and dependency failures
+- Frontend developers chasing browser-only and hydration bugs
+- DevOps/SRE teams handling deploy regressions and runtime incidents
+- Team leads building repeatable incident response workflows
 
 **Quick Navigation**
 
@@ -19,6 +55,44 @@ This handbook is for real debugging under pressure: vague stack traces, partial 
 - [DevOps / Deployment issues](#-devops--deployment-issues)
 - [AI debugging](#-ai-powered-debugging)
 
+**Precision Jump Navigation (No Long Scrolling)**
+
+| Need | Jump Directly |
+|------|---------------|
+| Start debugging now | [Start Here](#-start-here-if-youre-debugging-right-now) |
+| See the full flow first | [Debugging Flow](#-debugging-flow) |
+| View a real incident sample | [Real Debugging Snapshot](#-real-debugging-snapshot) |
+| Frontend bugs | [Frontend Issues](#-frontend-issues) |
+| Backend issues | [Backend Issues](#-backend-issues) |
+| Database issues | [Database Issues](#-database-issues) |
+| DevOps / deployment issues | [DevOps / Deployment Issues](#-devops--deployment-issues) |
+| AI workflow and prompts | [AI-Powered Debugging](#-ai-powered-debugging) |
+| Common mistakes to avoid | [Common Debugging Mistakes](#-common-debugging-mistakes) |
+| Best practices checklist | [Best Debugging Practices](#-best-debugging-practices) |
+| Incident triage checklist | [Incident Triage Checklist](#-incident-triage-checklist) |
+| References and docs | [References and Resources](#-references-and-resources) |
+| Contribution section | [Contribute](#-contribute) |
+
+**By Asset Type**: [Prompts](prompts/README.md) | [Templates](templates/README.md) | [Tools](tools/README.md) | [Case Studies](case-studies/README.md)
+
+## 🧱 Handbook Modules
+
+Think of this repository as a modular debugging product: prompts, templates, tools, and incident patterns that work together.
+
+| Module | Purpose | Open |
+|--------|---------|------|
+| Prompts Playbook | Fast AI prompts for logs, stack traces, and deploy diffs | [Open](prompts/README.md) |
+| Templates Kit | Reusable triage, **root cause**, and post-incident templates | [Open](templates/README.md) |
+| Tools Reference | Battle-tested debugging and observability stack | [Open](tools/README.md) |
+| Case Studies Hub | Real incident patterns with fixes and verification steps | [Open](case-studies/README.md) |
+
+**Quick Access Docs**
+
+- [Prompts Playbook](prompts/README.md) - copy-paste prompts for logs, stack traces, and release diffs
+- [Templates Kit](templates/README.md) - incident triage, root cause, and post-incident templates
+- [Tools Reference](tools/README.md) - practical tool stack for debugging and observability
+- [Case Studies Hub](case-studies/README.md) - real incident writeups and reusable failure patterns
+
 ## ⚡ TL;DR
 
 - Use this as a debugging playbook, not a theory doc.
@@ -26,30 +100,60 @@ This handbook is for real debugging under pressure: vague stack traces, partial 
 - Isolate the layer first: frontend, backend, database, or infrastructure.
 - Use AI as a fast analyst and pair debugger, not as an authority.
 - Keep a tight loop: observe, hypothesize, test, verify, document.
-- Favor root cause analysis over symptom patching.
+- Favor **root cause** analysis over symptom patching.
+
+---
+
+## 🧩 Debugging System Overview
+
+![Debugging System Overview](assets/debugging-flow.png)
+
+```mermaid
+flowchart LR
+	A[Signal: Alert / User report] --> B[Evidence: Logs + Traces + Metrics]
+	B --> C[Isolation: Frontend / Backend / DB / DevOps]
+	C --> D[Hypothesis loop with AI + human validation]
+	D --> E[Minimal safe fix]
+	E --> F[Verification under real conditions]
+	F --> G[Prevention: test + alert + runbook]
+```
 
 ---
 
 ## 🧭 Debugging Flow
 
-```text
-Symptom
-	↓
-Logs / traces / metrics
-	↓
-Isolate the layer
-	↓
-Reproduce the failure
-	↓
-Check recent changes
-	↓
-Use AI for hypotheses
-	↓
-Verify against evidence
-	↓
-Fix root cause
-	↓
-Add guardrails
+```mermaid
+flowchart TD
+	A[Alert or user-reported failure] --> B[Collect evidence: logs, traces, metrics, request IDs]
+	B --> C{Reproducible now?}
+	C -- Yes --> D[Reproduce with smallest failing request]
+	C -- No --> E[Correlate timeline with deploy/config/traffic changes]
+
+	D --> F{Failure layer?}
+	E --> F
+
+	F -- Frontend --> G[Browser console + network + hydration checks]
+	F -- Backend --> H[Trace request path + dependency latency]
+	F -- Database --> I[EXPLAIN plan + pool/lock/session analysis]
+	F -- DevOps --> J[CI logs + runtime env + health probes]
+
+	G --> K[Generate hypotheses with AI]
+	H --> K
+	I --> K
+	J --> K
+
+	K --> L[Test one hypothesis at a time]
+	L --> M{Confirmed by evidence?}
+	M -- No --> K
+	M -- Yes --> N[Apply minimal safe fix]
+
+	N --> O{Production risk high?}
+	O -- Yes --> P[Canary or rollback first]
+	O -- No --> Q[Deploy fix]
+
+	P --> R[Validate: error rate, p95 latency, saturation]
+	Q --> R
+	R --> S[Add regression test + alert + runbook note]
 ```
 
 **Reading order:** start at the symptom, move through evidence, and do not jump to code until the failure boundary is clear.
@@ -94,18 +198,20 @@ trace_id=8f3c2a1d6c7b4a2f
 
 ## ⚡ Start Here (If You’re Debugging Right Now)
 
-1. Read the first real error in the logs, not the last noisy one.
-2. Isolate the layer: browser, API, DB, queue, deploy, or infra.
-3. Reproduce it with the smallest possible request, payload, or environment.
-4. Compare against what changed: code, config, deploy, dependency, traffic.
-5. Ask AI for root cause hypotheses, then verify them against evidence.
+Use this when you need progress in the next 10 minutes.
+
+1. Find the **first error**, not the loudest one.
+2. Isolate the failing layer: browser, API, DB, queue, deploy, or infra.
+3. **Reproduce** with the smallest failing request or payload.
+4. Ask **what changed**: code, config, deploy, dependency, or traffic.
+5. Use AI for hypotheses, then verify each one with evidence.
 
 ---
 
 ## 🧠 Debugging Like a Senior Engineer
 
-- What changed is usually more useful than what failed.
-- The first error matters more than the final crash.
+- **What changed** is usually more useful than what failed.
+- The **first error** matters more than the final crash.
 - Config bugs beat code bugs more often than people admit.
 - If it only fails in one environment, treat it as an environment mismatch first.
 - If latency rises with traffic, suspect concurrency, saturation, or downstream pressure.
@@ -113,7 +219,7 @@ trace_id=8f3c2a1d6c7b4a2f
 - If AI gives you one answer with too much confidence, ask for alternatives and proof.
 - Production debugging is mostly evidence handling, not guesswork.
 - The system is telling you where to look if you read the logs in order.
-- Reproduction is a skill multiplier. Without it, you are patching blind.
+- **Reproduction** is a skill multiplier. Without it, you are patching blind.
 
 ## 📌 What This Handbook Covers
 
@@ -136,9 +242,18 @@ trace_id=8f3c2a1d6c7b4a2f
 | [case-studies/](case-studies/) | Real-world style failure patterns and incident writeups |
 | [tools/](tools/) | Utility references for debugging, observability, and AI-assisted workflows |
 
+One-click documents:
+
+- [Open Prompts README](prompts/README.md)
+- [Open Templates README](templates/README.md)
+- [Open Tools README](tools/README.md)
+- [Open Case Studies README](case-studies/README.md)
+
 ---
 
 ## 🧭 Debugging Workflow That Actually Works
+
+Use this flow as your incident execution loop, not just documentation.
 
 | Step | What To Do | Output You Want |
 |------|------------|-----------------|
@@ -148,7 +263,7 @@ trace_id=8f3c2a1d6c7b4a2f
 | 4. Isolate the layer | UI, API, service, DB, queue, cache, infra | The failure boundary |
 | 5. Form a hypothesis | One likely root cause at a time | A testable explanation |
 | 6. Validate | Change one thing, rerun, compare results | Proof, not vibes |
-| 7. Fix root cause | Correct the source, not the symptom | Stable behavior |
+| 7. Fix root cause | Correct the **root cause**, not the symptom | Stable behavior |
 | 8. Prevent recurrence | Add tests, alerts, runbooks, guardrails | Fewer repeats |
 
 ### Fast triage checklist
@@ -160,7 +275,7 @@ trace_id=8f3c2a1d6c7b4a2f
 - What is the first failing layer?
 - What does the log say before the failure, not after?
 
-**Rule of thumb:** if you cannot point to the first bad signal, you do not have a root cause yet.
+**Rule of thumb:** if you cannot point to the **first bad signal**, you do not have a **root cause** yet.
 
 ---
 
@@ -281,7 +396,7 @@ AI is useful when you treat it like a fast assistant with good context, not like
 | Drafting debugging steps | It can propose an ordered plan | Context, constraints, and what you already checked |
 | Translating unknown errors | It can explain vendor or framework-specific messages | Raw error text plus version details |
 
-**Best use pattern:** ask AI to explain the failure, suggest likely causes, and rank what to check first. Then verify it yourself.
+**Best use pattern:** ask AI to explain the failure, rank likely causes, and tell you what to check first. Then verify it yourself.
 
 ### What AI is bad at
 
@@ -566,8 +681,9 @@ Use this when the bug is happening right now.
 
 ## ⭐ Call to Action
 
-If this handbook helps you fix one bug faster, star the repo and bookmark it for the next incident. That is the kind of signal that keeps useful debugging content alive.
+If this saved you 30 minutes, star it now so it is one click away during your next production bug.
 
+If you have a production debugging pattern that works, add it here so the next engineer resolves the incident faster.
 
 ## 🤝 Contribute
 
@@ -593,4 +709,6 @@ The goal is simple: make this a living handbook that keeps getting more useful.
 
 ## Final Note
 
-The best debugging skill is not guessing faster. It is narrowing the problem faster, proving the cause, and fixing the thing that will break again if you ignore it.
+Great engineers do not win by guessing faster.
+
+They win by finding the **first signal**, proving the **root cause**, and fixing the part of the system that will fail again if ignored.
