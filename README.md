@@ -568,9 +568,6 @@ Use this when the bug is happening right now.
 
 If this handbook helps you fix one bug faster, star the repo and bookmark it for the next incident. That is the kind of signal that keeps useful debugging content alive.
 
-## 🔍 Keywords
-
-debugging guide, fix errors fast, backend issues, frontend bugs, production debugging, AI for developers, DevOps debugging, API debugging, database performance
 
 ## 🤝 Contribute
 
