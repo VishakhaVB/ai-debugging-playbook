@@ -1,13 +1,16 @@
-# 🚀 AI-Powered Debugging Handbook
+<h1 align="center">🚀 AI-Powered Debugging Handbook</h1>
 
-**The missing playbook for debugging real systems under pressure.**
+<p align="center"><strong>The missing playbook for debugging real systems under pressure.</strong></p>
 
-[![OpenAI](https://img.shields.io/badge/OpenAI-AI%20Debugging-412991?logo=openai&logoColor=white)](prompts/README.md)
-[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-In%20Editor%20Debugging-181717?logo=github&logoColor=white)](prompts/README.md)
-[![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white)](tools/README.md)
-[![Prometheus](https://img.shields.io/badge/Prometheus-Metrics-E6522C?logo=prometheus&logoColor=white)](tools/README.md)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database%20Debugging-4169E1?logo=postgresql&logoColor=white)](case-studies/database-pool-exhaustion.md)
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-Deployment%20Debugging-326CE5?logo=kubernetes&logoColor=white)](case-studies/deployment-crashloop-env-drift.md)
+
+<p align="center">
+	<a href="prompts/README.md"><img src="https://img.shields.io/badge/OpenAI-AI%20Debugging-412991?logo=openai&logoColor=white" alt="OpenAI" /></a>
+	<a href="prompts/README.md"><img src="https://img.shields.io/badge/GitHub%20Copilot-In%20Editor%20Debugging-181717?logo=github&logoColor=white" alt="GitHub Copilot" /></a>
+	<a href="tools/README.md"><img src="https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white" alt="Grafana" /></a>
+	<a href="tools/README.md"><img src="https://img.shields.io/badge/Prometheus-Metrics-E6522C?logo=prometheus&logoColor=white" alt="Prometheus" /></a>
+	<a href="case-studies/database-pool-exhaustion.md"><img src="https://img.shields.io/badge/PostgreSQL-Database%20Debugging-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" /></a>
+	<a href="case-studies/deployment-crashloop-env-drift.md"><img src="https://img.shields.io/badge/Kubernetes-Deployment%20Debugging-326CE5?logo=kubernetes&logoColor=white" alt="Kubernetes" /></a>
+</p>
 
 ⚠️ Production incident at 2:13 AM. Alerts flooding. Logs noisy. Root cause unclear.
 
@@ -69,8 +72,6 @@ This handbook exists to turn those moments into a **clear workflow** you can exe
 | References and docs | [References and Resources](#-references-and-resources) |
 | Contribution section | [Contribute](#-contribute) |
 
-**By Asset Type**: [Prompts](prompts/README.md) | [Templates](templates/README.md) | [Tools](tools/README.md) | [Case Studies](case-studies/README.md)
-
 ## 🧱 Handbook Modules
 
 Think of this repository as a modular debugging product: prompts, templates, tools, and incident patterns that work together.
@@ -102,16 +103,41 @@ Think of this repository as a modular debugging product: prompts, templates, too
 
 ## 🧩 Debugging System Overview
 
-![Debugging System Overview](assets/debugging-flow.png)
-
 ```mermaid
-flowchart LR
-	A[Signal: Alert / User report] --> B[Evidence: Logs + Traces + Metrics]
-	B --> C[Isolation: Frontend / Backend / DB / DevOps]
-	C --> D[Hypothesis loop with AI + human validation]
-	D --> E[Minimal safe fix]
-	E --> F[Verification under real conditions]
-	F --> G[Prevention: test + alert + runbook]
+%%{init: {'theme':'base','themeVariables': {'fontSize':'18px'}}}%%
+flowchart TB
+	subgraph S1[1. Detect]
+		A[Incident signal]
+		B[Collect logs, traces, metrics]
+		A --> B
+	end
+
+	subgraph S2[2. Isolate]
+		C[Identify failing layer]
+		D[Frontend / Backend / DB / DevOps]
+		C --> D
+	end
+
+	subgraph S3[3. Diagnose]
+		E[Generate hypotheses with AI]
+		F[Validate with evidence]
+		E --> F
+	end
+
+	subgraph S4[4. Fix]
+		G[Apply minimal safe fix]
+		H[Verify error rate and latency]
+		G --> H
+	end
+
+	subgraph S5[5. Prevent]
+		I[Add test, alert, runbook update]
+	end
+
+	B --> C
+	D --> E
+	F --> G
+	H --> I
 ```
 
 ---
