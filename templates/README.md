@@ -111,5 +111,171 @@ Owner + Due Date:
 | Capture evidence before patching | Prevents misleading conclusions |
 | Keep fixes and verification together | Reduces reopen risk |
 | Record prevention actions immediately | Stops repeat incidents |
+---
+---
+📌 Deployment Rollback Template
+Rollback Reason:
+Deployment Version:
+Rollback Trigger Time:
+
+Affected Services:
+Current User Impact:
+
+Rollback Steps:
+1.
+2.
+3.
+
+Verification After Rollback:
+- Error rate normalized
+- Latency stabilized
+- Services healthy
+- Alerts cleared
+
+Final Status:
+🔍 Environment Comparison Template
+Issue:
+Working Environment:
+Failing Environment:
+
+Compare:
+- Runtime version:
+- Environment variables:
+- Database version:
+- API endpoints:
+- Feature flags:
+- Secrets/config:
+
+Observed Differences:
+1.
+2.
+3.
+⚡ Performance Investigation Template
+Performance Issue:
+Affected Endpoint/Service:
+
+Observed Symptoms:
+- High CPU:
+- High Memory:
+- Slow Queries:
+- Network Delay:
+
+Metrics Collected:
+- p95 latency:
+- Error rate:
+- Throughput:
+- Saturation:
+
+Likely Bottleneck:
+Next Verification Step:
+🗄️ Database Investigation Template
+Database Issue:
+Database Type:
+Affected Queries/Tables:
+
+Symptoms:
+- Slow query
+- Deadlock
+- Pool exhaustion
+- Replication lag
+
+Evidence:
+- EXPLAIN output:
+- Active sessions:
+- Lock information:
+- Query timing:
+
+Fix Attempted:
+Verification Result:
+🌐 Frontend Bug Investigation Template
+Frontend Issue:
+Browser:
+Environment:
+
+Symptoms:
+- Hydration mismatch
+- Blank screen
+- Infinite loading
+- Stale data
+- API failure
+
+Console Errors:
+Network Errors:
+
+Component Affected:
+Recent Changes:
+Likely Cause:
+☁️ Kubernetes Incident Template
+Cluster:
+Namespace:
+Affected Pod/Service:
+
+Incident Type:
+- CrashLoopBackOff
+- OOMKilled
+- Failed scheduling
+- Network issue
+
+Evidence:
+- Pod logs:
+- Events:
+- Resource usage:
+- Deployment changes:
+
+Immediate Mitigation:
+Long-Term Fix:
+🔒 Security Investigation Template
+Security Incident:
+Severity:
+Detection Source:
+
+Suspicious Activity:
+- Failed logins
+- Token misuse
+- Traffic spike
+- Injection attempt
+
+Affected Systems:
+Evidence Collected:
+Containment Actions:
+Recovery Status:
+📊 Monitoring Gap Template
+Incident:
+Missing Alert:
+Why Existing Monitoring Failed:
+
+Metrics Missing:
+1.
+2.
+
+Logs Missing:
+1.
+2.
+
+Recommended Alerts:
+1.
+2.
+
+Dashboard Improvements:
+1.
+2.
+🧩 Root Cause Analysis Deep Dive Template
+Incident Summary:
+
+Technical Trigger:
+Hidden Contributing Factors:
+
+Why Detection Failed:
+Why Recovery Took Time:
+
+System Weaknesses:
+1.
+2.
+3.
+
+Long-Term Prevention Plan:
+1.
+2.
+3.
 
 Last updated: 2026-04-15
